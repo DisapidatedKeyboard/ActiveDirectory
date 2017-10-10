@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="MyCss/login.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />    
+    <script src="Scripts/jquery-1.9.1.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Login</title>
+	<meta charset="utf-8" />
+
+    <style>
+        .div {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 240px;
+            height: 150px;
+            margin-left: -100px;
+            margin-top: -50px;
+        }
+    </style>
+</head>
+<body style="background:url(images/bg_login.png) ;background-size:cover">    
+    <div id="content">     
+        <h1 style="color:gray;font-family:'Microsoft YaHei';text-align:center">Login</h1>
+        <form action="LoginOp.ashx" method="post" style="margin-left:20px">
+            <div class="login-input-box">
+                <span class="icon icon-domain"></span>
+                <input id="domainname" name="domainname" type="text" placeholder="Please input your domain:xxx.com">
+            </div>
+            <div class="login-input-box">
+                <span class="icon icon-ip"></span>
+                <input id="domainip" name="domainip" type="text" placeholder="Please input your domain ip address">
+            </div>
+            <div class="login-input-box">
+                <span class="icon icon-user"></span>
+                <input id="user" name="user" type="text" placeholder="Please input your domain name">
+            </div>
+            <div class="login-input-box">
+                <span class="icon icon-password"></span>
+                <input id="pwd" name="pwd" type="password" placeholder="Please input your domain password">
+            </div>
+
+
+            <div class="login-button-box">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

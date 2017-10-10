@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/bootstrap-treeview.css" rel="stylesheet" />
+    <link href="Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <link href="MyCss/listIndex.css" rel="stylesheet" />
+    <link href="Content/loaders.min.css" rel="stylesheet" />
+
+    <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="MyScripts/listindex.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/bootstrap-treeview.js"></script>
+    <script src="Scripts/jquery-ui-1.9.0.js"></script>
+    <script src="Scripts/loaders.css.js"></script>
+
+    <title>Active Directory Domain Management</title>
+    <meta charset="utf-8" />
+
+</head>
+<body style="background:url(images/bg_list.png) no-repeat;background-size:cover">
+
+
+    <nav class="navbar navbar-default" style="background:none; border:none" role="navigation">
+
+        <div style="margin-top:25px;margin-left:25px;">
+            <Button id="AddUser" class="cirbutton" data-toggle="modal" data-target="#addModal" onclick="AddUser()">Add User</Button>
+            <Button id="AddOU" class="cirbutton" data-toggle="modal" data-target="#addOUModal" onclick="AddOU()">Add OU</Button>
+            <Button id="AddGP" class="cirbutton" data-toggle="modal" data-target="#addGPModal" onclick="AddGP()">Add Group</Button>
+            <Button id="Refresh" class="btnnone" onclick="Refresh()">Refresh</Button>            
+            <span id="domainuser" style="margin-right:10px;color:lightgray"></span>
+        </div>
+
+    </nav>
+    <div style="margin-left:5px;margin-top:10px;margin-right:25px">
+        <div id="treeview" style="margin-left:25px;width:300px;height:550px;float:left;display:inline;overflow:auto">
+
+        </div>
+        <div style="display:inline;">
+            <table id="table" style="float:right">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Type
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Operate
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="listbody"></tbody>
+            </table>
+        </div>
+    </div>
+    <!--Modify user information modal box-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:520px;">
+            <div class="modal-content" style="height:450px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel">
+                        Update user's information
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:380px;">
+                    <div class="div">
+                        <div id="change" class="form">
+                            <div id="changeuer">
+                                <!--<div> <label>Username  ：</label>&nbsp;&nbsp;&nbsp;<input id="newname" name="newname" /><br /></div>--><!--Use it when you want to rename-->
+                                <div> <label>Lastname  ：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="lastname" name="lastname" /><br /></div>
+                                <div> <label>Firstname  ：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="firstname" name="firstname" /><br /></div>
+                                <div> <label>Displayname：</label>&nbsp;&nbsp;&nbsp;<input id="displayname" name="displayname" /><br /></div>
+                                <div> <label>Loginname：</label>&nbsp;&nbsp;&nbsp;<input id="loginname" name="loginname" /><br /></div>
+                                <div> <label>Description：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="description" name="description" /><br /></div>
+                                <div> <label>Department：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="department" name="department" /><br /></div>
+                                <div> <label>Telphone：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="telphone" name="telphone" /><br /></div>
+                                <div style="padding-left:40px;padding-right:40px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="ChangeUserInfo()">Submit</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--Add user modal box-->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog" style="width:800px;">
+            <div class="modal-content" style="height:600px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel2">
+                        Add User
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:540px;">
+                    <div class="tree">
+                        <div id="tree">
+                            <div style="margin-top:50px;margin-left:80px;">
+                                <div class="loader-inner ball-pulse" style="background:#a3bdea;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="form" class="form add">
+                        <div id="adduer">
+                            <div> <label>Lastname  ：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="lastname_add" name="lastname_add" /><a style="color:red">*</a><br /></div>
+                            <div> <label>Firstname  ：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="firstname_add" name="firstname_add" /><a style="color:red">*</a><br /></div>
+                            <div> <label>Displayname：</label>&nbsp;&nbsp;&nbsp;<input id="displayname_add" name="displayname" /><br /></div>
+                            <div> <label>Loginname：</label>&nbsp;&nbsp;&nbsp;<input id="loginname_add" name="loginname" /><a style="color:red">*</a><br /></div>
+                            <div> <label>Description：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="description_add" name="description_add" /><br /></div>
+                            <div> <label>Department：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="department_add" name="department_add" /><br /></div>
+                            <div> <label>Telphone：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="telphone_add" name="telphone_add" /><br /></div>
+                            <div> <label>Password：</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="password_add" type="password" name="password_add" /><a style="color:yellow">*</a><br /></div>
+                            <div> <label>Confirm Password：</label><input id="confirmpwd_add" type="password" name="confirmpwd_add" /><a style="color:yellow">*</a><br /></div>
+                            <div style="padding-left:40px;padding-right:40px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="adduser()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--Rename Group modal box-->
+    <div class="modal fade" id="renameGPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+        <div class="modal-dialog" style="width:360px;">
+            <div class="modal-content" style="height:240px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel3">
+                        Rename Group
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:200px;">                    
+                    <div id="renamegpform" style="width:340px;height:200px;margin-left:auto;margin-right:auto;margin-top:auto;">
+                        <div id="renamegroup">
+                            <div style="text-align:center"> <label>Group Name ：</label><input id="gpname" name="gpname" /><a style="color:red">*</a><br /></div>
+                            <div style="text-align:center;padding-left:60px;padding-right:60px;margin-top:40px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="renameGP()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--Rename organization units modal box-->
+    <div class="modal fade" id="renameOUModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+        <div class="modal-dialog" style="width:360px;">
+            <div class="modal-content" style="height:240px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel4">
+                        Rename organization units
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:200px;">
+                    <div id="renameouform" style="width:340px;height:200px;margin-left:auto;margin-right:auto;margin-top:auto;">
+                        <div id="renameou">
+                            <div style="text-align:center"> <label>OU Name ：</label><input id="ouname" name="ouname" /><a style="color:red">*</a><br /></div>
+                            <div style="text-align:center;padding-left:60px;padding-right:60px;margin-top:40px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="renameOU()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--Add organization units modal box-->
+    <div class="modal fade" id="addOUModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5" aria-hidden="true">
+        <div class="modal-dialog" style="width:800px;">
+            <div class="modal-content" style="height:600px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel5">
+                        Add organization units
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:540px;">
+                    <div class="tree">
+                        <div id="OUtree">
+                            <div style="margin-top:50px;margin-left:80px;">
+                                <div class="loader-inner ball-pulse" style="background:#a3bdea;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ouform" class="form add">
+                        <div id="addou">
+                            <div> <label>OU Name ：</label><input id="ouname_add" name="ouname_add" /><a style="color:red">*</a><br /></div>                            
+                            <div style="padding-left:40px;padding-right:40px;margin-top:320px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="addOU()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    <!--Add group modal box-->
+    <div class="modal fade" id="addGPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6" aria-hidden="true">
+        <div class="modal-dialog" style="width:600px;">
+            <div class="modal-content" style="height:480px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel6">
+                        Add Group
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:420px;">
+                    <div class="tree">
+                        <div id="GPtree">
+                            <div style="margin-top:50px;margin-left:80px;">
+                                <div class="loader-inner ball-pulse" style="background:#a3bdea;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gpform" class="form add">
+                        <div id="addgp">
+                            <div> <label>Group Name ：</label><input id="gpname_add" name="gpname_add" /><a style="color:red">*</a><br /></div>
+                            <div style="padding-left:40px;padding-right:40px;margin-top:320px;"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="addGP()">Submit</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <!--Moving object modal box-->
+    <div class="modal fade" id="movetoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel7" aria-hidden="true">
+        <div class="modal-dialog" style="width:480px;">
+            <div class="modal-content" style="height:530px;">
+                <div class="modal-header" style="background:#a3bdea;color:white;border-top-right-radius: 6px;border-top-left-radius: 6px">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h5 class="modal-title" style="font-family:'Microsoft YaHei'" id="myModalLabel7">
+                        Please select the location you want to move to
+                    </h5>
+                </div>
+                <div class="modal-body" style="height:480px;">
+                    <div class="div">                        
+                        <div id="movetoform" style="width:420px;height:420px;margin-left:auto;margin-top:auto;">
+                            <div id="move" class="tree">      
+                                <div id="movetree">
+                                    <div style="margin-top:50px;margin-left:80px;">
+                                        <div class="loader-inner ball-pulse" style="background:#a3bdea;"></div>
+                                    </div>
+                                </div>                                                          
+                            </div>
+                            <div style="height:40px;padding-left:40px;padding-right:40px;padding-top:390px"> <button class="subutton" id="close" type="button" data-dismiss="modal">Close</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="subutton" onclick="movetosubmit()">Move</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+</html>
+

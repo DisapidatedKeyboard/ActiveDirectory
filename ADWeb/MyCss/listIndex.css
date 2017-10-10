@@ -1,0 +1,209 @@
+﻿body {
+}
+
+.cirbutton {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background: #a3bdea;
+    font-family: 'Microsoft YaHei';
+    color: white;
+    border: 1px solid #a3bdeb;
+}
+
+    .cirbutton:hover {
+    border:1px solid white;
+    }
+
+.btnnone {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    background: none;
+    font-family: 'Microsoft YaHei';
+    color: #a3bdea;    
+    border: 1px solid white;
+}
+
+    .btnnone:hover {
+    border:1px solid #a3bdea;
+
+    }
+
+
+table {
+    margin-left:25px;
+    margin-right:25px;
+    border-radius:8px;    
+    overflow:hidden;
+    border: 1px solid #ececec;    
+    table-layout:fixed;       
+}
+
+th {
+    background: #a3bdea;
+    font-family: 'Microsoft YaHei';
+    color: white;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ececec;    
+}
+
+tbody {    
+    font-family: 'Microsoft YaHei';
+    color: #808080;
+    text-align: center;        
+    height:550px;
+    overflow:scroll;
+}
+
+tr {
+    height: 40px;
+    
+}
+tr:nth-child(odd){
+    background:#f9f9f9;
+}
+tr:nth-child(even){
+    background:#efefef;
+}
+tr:hover{
+    background:#eaeaea;
+}
+td{
+    border: 1px solid #ececec;
+}
+
+.btnchange {  
+    background-image: url('../images/update.png');
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;       
+    background-color:white;
+    height: 36px;
+    width: 36px;    
+    border: 1px solid #969696;    
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    margin-right: 5px;
+    margin-top:5px;
+}
+
+    .btnchange:hover {    
+        border:1px solid white;
+    }
+
+.btndelete {        
+    background-image: url('../images/delete.png');
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;         
+    background-color:white;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #969696;
+    margin-left: 5px;
+    margin-top:5px;
+}
+
+    .btndelete:hover {
+        border:1px solid white;
+    }
+
+  .btncheck {      
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;      
+    background-color:white;
+    height: 36px;
+    width: 36px;
+    border: 1px solid #969696;    
+    margin-left: 10px;
+    margin-top:5px;
+
+}
+
+    .btncheck:hover {
+        border:1px solid white;
+    }
+
+.btnmove {   
+    background-image: url('../images/move.png');
+    background-size: 25px 25px;
+    background-position: center;
+    background-repeat: no-repeat;  
+    background-color: white;
+    height: 36px;
+    width: 36px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: 1px solid #969696;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+    .btnmove:hover {
+        border:1px solid white;
+    }
+   
+
+.div{
+    width:280px;
+    height:320px;
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.form{
+    width:320px;
+    height:320px;       
+    margin-left:auto;
+    margin-top:auto;    
+}
+input {
+    width:200px;
+    height:30px;
+    border-radius:5px;
+    border:1px solid #a3bdea;
+    margin-bottom:5px;
+    margin-top:5px;
+    font-family:'Microsoft YaHei';
+    color:#787878;
+}
+label{
+    color:#a3bdea;
+    font-family:'Microsoft YaHei';
+    text-align:left;
+}
+
+.subutton{
+    width:80px;
+    height:30px;
+    border-radius:8px;
+    background:#ececec;
+    color:#787878;
+    font-family:'Microsoft YaHei';
+    border:1px solid #ececec;
+    display:inline;
+}
+
+
+.tree{
+    width:280px;
+    height:390px;        
+    margin-left:5px;
+    margin-top:5px;
+    float:left;
+    display:inline;
+    overflow:auto;
+}
+
+.form .add{
+    width:260px;
+    height:420px;       
+    margin-left:5px;
+    margin-top:5px;
+    float:right;
+    display:inline;
+}

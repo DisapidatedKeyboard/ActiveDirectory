@@ -1,0 +1,116 @@
+﻿.treeview, .treeview ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+    .treeview ul {
+        margin-top: 4px;
+    }
+
+    .treeview li {
+        margin: 0;
+        padding: 0px 3px 0px 16px;
+    }
+
+        .treeview li.node-bg-vimage {
+            background: url(images/treeview-vertical-line.gif) no-repeat left top;
+            height: 100%;
+            background-position: -18px 0px;
+        }
+
+    .treeview .no-hit-area {
+        background: url(images/treeview-line.gif) -1px -37px no-repeat;
+        height: 16px;
+        width: 16px;
+        margin-left: -16px;
+        float: left;
+    }
+
+        .treeview .no-hit-area.hit-last {
+            background-color: #ffffff;
+            background-position: -1px -55px;
+        }
+
+        .treeview .no-hit-area.hit-single {
+            background-color: #ffffff;
+            background-position: -1px -55px;
+        }
+
+    .treeview .hit-area {
+        background: url(images/treeview-default.gif) no-repeat left top;
+        background-color: #ffffff;
+        height: 16px;
+        width: 16px;
+        margin-left: -16px;
+        float: left;
+        cursor: pointer;
+    }
+
+        .treeview .hit-area.scontainer-expand {
+            background-position: -1px -37px;
+        }
+
+            .treeview .hit-area.scontainer-expand.hit-first {
+                background-position: -1px -1px;
+            }
+
+            .treeview .hit-area.scontainer-expand.hit-last {
+                background-position: -1px -109px;
+                background-color: #ffffff;
+            }
+
+            .treeview .hit-area.scontainer-expand.hit-single {
+                background-position: -1px -73px;
+                background-color: #ffffff;
+            }
+
+        .treeview .hit-area.scontainer-collapse {
+            background-position: -1px -55px;
+        }
+
+            .treeview .hit-area.scontainer-collapse.hit-first {
+                background-position: -1px -19px;
+            }
+
+            .treeview .hit-area.scontainer-collapse.hit-last {
+                background-position: -1px -127px;
+                background-color: #ffffff;
+            }
+
+            .treeview .hit-area.scontainer-collapse.hit-single {
+                background-position: -1px -91px;
+                background-color: #ffffff;
+            }
+
+    .treeview .with-child-node {
+    }
+
+    .treeview .without-child-node {
+    }
+
+    .treeview .scontainer-expand {
+    }
+
+    .treeview .scontainer-collapse {
+    }
+
+    .treeview .scontainer-node-render-container {
+    }
+
+    .treeview .scontainer-node-text {
+        margin-left: 5px;
+    }
+
+    .treeview .hit-first {
+    }
+
+    .treeview .hit-last {
+    }
+
+    .treeview .hit-single {
+    }
+    
+    .treeview .scontainer-node-highlight {
+        font-weight: bold;
+    }
